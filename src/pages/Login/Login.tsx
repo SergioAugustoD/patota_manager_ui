@@ -1,105 +1,66 @@
 import { useState } from 'react'
 import AuthService from '../../services/AuthService'
+import { FaEnvelope, FaLock } from 'react-icons/fa'
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  const handleLogin = async () => {
-    const resp = AuthService.login({ email, password })
-
-    console.log(resp)
+  const handleLogin = () => {
+    AuthService.login({ email, password })
   }
 
-  const handleRegister = () => {
-    console.log('Register:', { email, password })
+  const handleSignup = () => {
+    window.location.href = '/signup'
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 to-indigo-600">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-          Login
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-700 to-purple-700">
+      <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full transform transition-transform hover:scale-105">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+          Bem vindo
         </h2>
-        <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
-            Email
-          </label>
-          <div className="flex items-center border-b border-gray-300 py-2">
-            <svg
-              className="w-6 h-6 text-gray-400 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M16 12A4 4 0 008 12m8 0a4 4 0 00-8 0m8 0V8m0 4v4m4-2a2 2 0 00-2-2h-8a2 2 0 00-2 2v4m6-4v2m0 0H8m4 0v4m0-4h2m-2 0h-2"
-              />
-            </svg>
+        <div className="space-y-6">
+          <div className="relative">
+            <FaEnvelope className="absolute left-3 top-4 text-gray-400 " />
             <input
               type="email"
-              id="email"
-              value={email}
+              className="w-full pl-10 pr-4 py-2 mt-1 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-500"
+              placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
-              className="appearance-none bg-transparent border-none w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
-              placeholder="Enter your email"
             />
           </div>
-        </div>
-        <div className="mb-8">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <div className="flex items-center border-b border-gray-300 py-2">
-            <svg
-              className="w-6 h-6 text-gray-400 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 15v2m0-6v4m-4-4v4m8-4v4m4-2a2 2 0 00-2-2h-8a2 2 0 00-2 2v4m6-4v2m0 0H8m4 0v4m0-4h2m-2 0h-2"
-              />
-            </svg>
+          <div className="relative">
+            <FaLock className="absolute left-3 top-4 text-gray-400 " />
             <input
               type="password"
-              id="password"
-              value={password}
+              className="w-full pl-10 pr-4 py-2 mt-1 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-500"
+              placeholder="Senha"
               onChange={(e) => setPassword(e.target.value)}
-              className="appearance-none bg-transparent border-none w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
-              placeholder="Enter your password"
             />
           </div>
+          <div className="flex items-center justify-between">
+            <button
+              onClick={handleLogin}
+              className="w-full py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500 transform transition-transform hover:scale-105"
+            >
+              Login
+            </button>
+          </div>
+          <div className="flex items-center justify-center mt-6">
+            <button
+              type="button"
+              onClick={handleSignup}
+              className="w-full py-3 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-300 transform transition-transform hover:scale-105"
+            >
+              Cadastrar
+            </button>
+          </div>
         </div>
-        <div className="flex items-center justify-between">
-          <button
-            onClick={handleLogin}
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
-          >
-            Log In
-          </button>
-        </div>
-        <div className="mt-4 text-center">
-          <button
-            onClick={handleRegister}
-            className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
-          >
-            Register
-          </button>
+        <div className="mt-8 text-center">
+          <a href="#" className="text-blue-500 hover:underline">
+            Esqueceu sua senha?
+          </a>
         </div>
       </div>
     </div>
