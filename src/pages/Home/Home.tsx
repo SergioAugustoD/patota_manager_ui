@@ -20,19 +20,21 @@ const Home: React.FC = () => {
 
         <div className="bg-white p-6 rounded-2xl shadow-2xl hover:shadow-3xl transform transition-transform hover:scale-105">
           <FaUsers className="text-3xl text-blue-500 mb-4" />
-          <h2 className="text-2xl font-semibold mb-2">Equipes Registradas</h2>
-          <p className="text-gray-600">Confira todas as equipes registradas.</p>
+          <h2 className="text-2xl font-semibold mb-2">Patotas Registradas</h2>
+          <p className="text-gray-600">Confira todas as patotas registradas.</p>
           <button className="mt-4 py-2 px-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500 transform transition-transform hover:scale-105">
-            Ver Equipes
+            Ver Patotas
           </button>
         </div>
 
         <div className="bg-white p-6 rounded-2xl shadow-2xl hover:shadow-3xl transform transition-transform hover:scale-105">
           <FaPlusCircle className="text-3xl text-purple-500 mb-4" />
-          <h2 className="text-2xl font-semibold mb-2">Criar Nova Partida</h2>
-          <p className="text-gray-600">Agende uma nova partida de futebol.</p>
+          <h2 className="text-2xl font-semibold mb-2">Criar Patota</h2>
+          <p className="text-gray-600">
+            Crie sua nova patota e curta com os amigos.
+          </p>
           <button className="mt-4 py-2 px-4 bg-purple-500 text-white rounded-full hover:bg-purple-600 focus:outline-none focus:ring-4 focus:ring-purple-500 transform transition-transform hover:scale-105">
-            Criar Partida
+            Criar Patota
           </button>
         </div>
       </div>
