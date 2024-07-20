@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import AuthService from '../../services/AuthService'
 import { FaEnvelope, FaLock } from 'react-icons/fa'
+import CustomToast from '../../utils/Toast'
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('')
@@ -8,6 +9,11 @@ const Login: React.FC = () => {
 
   const handleLogin = () => {
     AuthService.login({ email, password })
+    window.location.href = '/home'
+    CustomToast.showToast({
+      type: 'success',
+      message: 'Login realizado com sucesso!'
+    })
   }
 
   const handleSignup = () => {

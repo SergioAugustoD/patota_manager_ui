@@ -1,6 +1,6 @@
 export interface IApiResponse<T> {
   success: boolean
   data: T
-  errors: []
+  errors: string[]
   message: string
 }
