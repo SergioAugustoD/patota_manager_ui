@@ -1,12 +1,6 @@
-export interface LoginData {
-  token: string
-  user: User
-}
+import { IUser } from './IUser'
 
-type User = {
-  userId: number
-  name: string
-  username: string
-  email: string
-  role: string
+export interface ILoginData {
+  token: string
+  user: IUser
 }

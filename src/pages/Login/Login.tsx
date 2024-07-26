@@ -2,18 +2,46 @@ import { useState } from 'react'
 import AuthService from '../../services/AuthService'
 import { FaEnvelope, FaLock } from 'react-icons/fa'
 import CustomToast from '../../utils/Toast'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
+import { ILoginData } from '../../interfaces/ILoginData'
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
-  const handleLogin = () => {
-    AuthService.login({ email, password })
-    window.location.href = '/home'
-    CustomToast.showToast({
-      type: 'success',
-      message: 'Login realizado com sucesso!'
-    })
+  const handleLogin = async () => {
+    try {
+      const resp = await AuthService.sign({ email, password })
+
+      if (resp.success && resp.data) {
+        const respData: ILoginData = {
+          token: resp.data.token,
+          user: resp.data.user
+        }
+        login(respData)
+
+        CustomToast.showToast({
+          type: 'success',
+          message: 'Login realizado com sucesso!'
+        })
+
+        navigate('/home')
+      } else {
+        CustomToast.showToast({
+          type: 'error',
+          message: resp.message || 'Erro ao realizar login!'
+        })
+      }
+    } catch (error) {
+      CustomToast.showToast({
+        type: 'error',
+        message:
+          'Erro ao realizar login! Verifique suas credenciais e tente novamente.'
+      })
+    }
   }
 
   const handleSignup = () => {

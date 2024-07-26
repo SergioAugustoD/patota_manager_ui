@@ -10,13 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.3",
+    "@types/react-slick": "^0.23.13",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
+    "ngrok": "^5.0.0-beta.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.24.1",
-    "react-toastify": "^10.0.5"
+    "react-slick": "^0.30.2",
+    "react-toastify": "^10.0.5",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",

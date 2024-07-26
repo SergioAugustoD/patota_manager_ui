@@ -1,8 +1,11 @@
+// src/routes.tsx
+import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import Login from './pages/Login/Login'
 import Home from './pages/Home/Home'
 import ErrorPage from './error-page'
 import Signup from './pages/Signup/Signup'
+import ProtectedRoute from './components/ProtectedRoute'
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +15,11 @@ export const router = createBrowserRouter([
   },
   {
     path: '/home',
-    element: <Home />,
+    element: (
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    ),
     errorElement: <ErrorPage />
   },
   {

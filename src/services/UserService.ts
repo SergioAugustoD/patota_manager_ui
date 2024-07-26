@@ -1,6 +1,6 @@
 import { IApiResponse } from '../interfaces/IApiResponse'
 import { ISignup } from '../interfaces/ISignup'
-import { instance } from '../server/api'
+import instance from '../server/api'
 
 async function signup(data: ISignup): Promise<IApiResponse<undefined>> {
   return instance
