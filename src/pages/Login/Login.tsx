@@ -13,34 +13,21 @@ const Login: React.FC = () => {
   const navigate = useNavigate()
 
   const handleLogin = async () => {
-    try {
-      const resp = await AuthService.sign({ email, password })
+    const resp = await AuthService.sign({ email, password })
 
-      if (resp.success && resp.data) {
-        const respData: ILoginData = {
-          token: resp.data.token,
-          user: resp.data.user
-        }
-        login(respData)
-
-        CustomToast.showToast({
-          type: 'success',
-          message: 'Login realizado com sucesso!'
-        })
-
-        navigate('/home')
-      } else {
-        CustomToast.showToast({
-          type: 'error',
-          message: resp.message || 'Erro ao realizar login!'
-        })
+    if (resp.success && resp.data) {
+      const respData: ILoginData = {
+        token: resp.data.token,
+        user: resp.data.user
       }
-    } catch (error) {
+      login(respData)
+
       CustomToast.showToast({
-        type: 'error',
-        message:
-          'Erro ao realizar login! Verifique suas credenciais e tente novamente.'
+        type: 'success',
+        message: resp.message
       })
+
+      navigate('/home')
     }
   }
 
@@ -49,7 +36,7 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-700 to-purple-700">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-700 to-purple-700 px-4 sm:px-0">
       <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full transform transition-transform hover:scale-105">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Bem vindo

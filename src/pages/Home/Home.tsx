@@ -76,45 +76,51 @@ const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-r from-green-400 to-blue-500 p-8">
-      <header className="flex justify-between items-center w-full mb-8">
-        <h1 className="text-4xl font-bold text-white">Patota Manager</h1>
+      <header className="flex justify-between items-center w-full p-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-white">
+          Patota Manager
+        </h1>
         <div className="relative" ref={dropdownRef}>
+          {/* Mobile View: Hamburger Menu */}
           <div
-            className="sm:hidden bg-white p-4 rounded-full shadow-lg flex items-center space-x-4 cursor-pointer"
+            className="flex sm:hidden bg-white p-3 rounded-full shadow-lg items-center space-x-4 cursor-pointer"
             onClick={toggleDropdown}
           >
             <FaBars className="text-2xl text-gray-700" />
           </div>
+
+          {/* Desktop View: User Info */}
           <div
-            className="hidden sm:flex bg-white p-4 rounded-full shadow-lg items-center space-x-4 cursor-pointer"
+            className="hidden sm:flex bg-white p-3 rounded-full shadow-lg items-center space-x-4 cursor-pointer"
             onClick={toggleDropdown}
           >
             <FaUser className="text-2xl text-gray-700" />
-            <div>
+            <div className="hidden md:block">
               <p className="text-gray-800 font-semibold">{user.name}</p>
               <p className="text-gray-600 text-sm">{user.email}</p>
             </div>
           </div>
+
+          {/* Dropdown Menu */}
           {isDropdownOpen && (
-            <div className="flex justify-center">
-              <div className="absolute flex flex-col items-center mt-2 w-48 bg-white rounded-lg shadow-xl z-10  ">
-                <div className="sm:hidden block p-4">
-                  <p className="text-gray-800 font-semibold">{user.name}</p>
-                  <p className="text-gray-600 text-sm mb-2">{user.email}</p>
-                </div>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                >
-                  Informações
-                </a>
-                <a
-                  onClick={handleLogout}
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                >
-                  Deslogar
-                </a>
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-10">
+              {/* Mobile Only: Display User Info */}
+              <div className="block sm:hidden p-4 text-center">
+                <p className="text-gray-800 font-semibold">{user.name}</p>
+                <p className="text-gray-600 text-sm mb-2">{user.email}</p>
               </div>
+              <a
+                href="#"
+                className="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-center"
+              >
+                Informações
+              </a>
+              <button
+                onClick={handleLogout}
+                className="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-center w-full"
+              >
+                Deslogar
+              </button>
             </div>
           )}
         </div>

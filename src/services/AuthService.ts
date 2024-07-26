@@ -2,6 +2,7 @@ import { IApiResponse } from '../interfaces/IApiResponse'
 import { ILogin } from '../interfaces/ILogin'
 import { IUser } from '../interfaces/IUser'
 import instance from '../server/api'
+import CustomToast from '../utils/Toast'
 
 interface ILoginResponseData {
   token: string
@@ -12,7 +13,10 @@ async function sign(data: ILogin): Promise<IApiResponse<ILoginResponseData>> {
 
   const dataResponse = response.data
   if (!dataResponse.success) {
-    throw new Error(dataResponse.message)
+    CustomToast.showToast({
+      type: 'error',
+      message: dataResponse.message
+    })
   }
 
   return dataResponse

@@ -14,6 +14,11 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
+    path: '/login',
+    element: <Login />,
+    errorElement: <ErrorPage />
+  },
+  {
     path: '/home',
     element: (
       <ProtectedRoute>
