@@ -5,15 +5,15 @@ import CustomToast from '../../utils/Toast'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { ILoginData } from '../../interfaces/ILoginData'
+import { ILogin } from '../../interfaces/ILogin'
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
+  const [credentials, setCredentials] = useState<ILogin>({} as ILogin)
   const { login } = useAuth()
   const navigate = useNavigate()
 
   const handleLogin = async () => {
-    const resp = await AuthService.sign({ email, password })
+    const resp = await AuthService.sign(credentials)
 
     if (resp.success && resp.data) {
       const respData: ILoginData = {
@@ -48,7 +48,9 @@ const Login: React.FC = () => {
               type="email"
               className="w-full pl-10 pr-4 py-2 mt-1 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-500"
               placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) =>
+                setCredentials({ ...credentials, email: e.target.value })
+              }
             />
           </div>
           <div className="relative">
@@ -57,7 +59,9 @@ const Login: React.FC = () => {
               type="password"
               className="w-full pl-10 pr-4 py-2 mt-1 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-500"
               placeholder="Senha"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) =>
+                setCredentials({ ...credentials, password: e.target.value })
+              }
             />
           </div>
           <div className="flex items-center justify-between">

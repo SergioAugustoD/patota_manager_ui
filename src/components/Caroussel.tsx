@@ -144,7 +144,10 @@ const Carousel = () => {
           {groupedTeams.map((group, index) => (
             <div key={index} className="flex w-full">
               {group.map((team) => (
-                <div key={team.id} className="w-full md:w-1/3 px-2 md:px-4">
+                <div
+                  key={team.id}
+                  className="w-full md:w-1/3 px-2 md:px-4 h-4/5"
+                >
                   <div className="bg-white p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105">
                     <h3 className="text-lg font-semibold mb-2">{team.name}</h3>
                     <p className="text-gray-600 mb-1">

@@ -76,20 +76,17 @@ const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-r from-green-400 to-blue-500 p-8">
-      <header className="flex justify-between items-center w-full p-4">
+      <header className="flex justify-between items-center w-full p-2 ">
         <h1 className="text-3xl md:text-4xl font-bold text-white">
           Patota Manager
         </h1>
         <div className="relative" ref={dropdownRef}>
-          {/* Mobile View: Hamburger Menu */}
           <div
             className="flex sm:hidden bg-white p-3 rounded-full shadow-lg items-center space-x-4 cursor-pointer"
             onClick={toggleDropdown}
           >
             <FaBars className="text-2xl text-gray-700" />
           </div>
-
-          {/* Desktop View: User Info */}
           <div
             className="hidden sm:flex bg-white p-3 rounded-full shadow-lg items-center space-x-4 cursor-pointer"
             onClick={toggleDropdown}
@@ -100,11 +97,8 @@ const Home: React.FC = () => {
               <p className="text-gray-600 text-sm">{user.email}</p>
             </div>
           </div>
-
-          {/* Dropdown Menu */}
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-10">
-              {/* Mobile Only: Display User Info */}
+            <div className="absolute sm:left-1/2 sm:transform sm:-translate-x-1/2 right-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-10 flex flex-col justify-center items-center">
               <div className="block sm:hidden p-4 text-center">
                 <p className="text-gray-800 font-semibold">{user.name}</p>
                 <p className="text-gray-600 text-sm mb-2">{user.email}</p>
@@ -126,9 +120,9 @@ const Home: React.FC = () => {
         </div>
       </header>
 
-      <div className="w-full max-w-3xl mb-12">
-        <h2 className="text-3xl font-bold text-white mb-4">
-          Últimas Patotas Criadas
+      <div className="w-full max-w-3xl mb-12 ">
+        <h2 className="text-center text-3xl font-bold text-white mb-4">
+          Patotas Recentes
         </h2>
         <Carousel />
       </div>

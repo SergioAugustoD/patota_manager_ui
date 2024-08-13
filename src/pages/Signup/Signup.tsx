@@ -3,22 +3,17 @@ import { FaUser, FaUserCircle, FaEnvelope, FaLock } from 'react-icons/fa'
 import UserService from '../../services/UserService'
 import CustomToast from '../../utils/Toast'
 import { useNavigate } from 'react-router-dom'
-
-const initialState = {
-  email: '',
-  password: '',
-  name: '',
-  username: ''
-}
+import { ISignup } from '../../interfaces/ISignup'
 
 function Signup() {
-  const [state, setState] = useState(initialState)
+  const [signupInfo, setSignupInfo] = useState<ISignup>({} as ISignup)
+
   const navigate = useNavigate()
 
   const handleSignup = async (event: React.FormEvent) => {
     event.preventDefault()
 
-    const resp = await UserService.signup(state)
+    const resp = await UserService.signup(signupInfo)
 
     if (resp.success) {
       CustomToast.showToast({
@@ -36,7 +31,7 @@ function Signup() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
-    setState((prevState) => ({ ...prevState, [name]: value }))
+    setSignupInfo((prevState) => ({ ...prevState, [name]: value }))
   }
 
   return (
@@ -53,7 +48,7 @@ function Signup() {
               name="name"
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-500"
               placeholder="Nome"
-              value={state.name}
+              value={signupInfo.name}
               onChange={handleChange}
             />
           </div>
@@ -64,7 +59,7 @@ function Signup() {
               name="username"
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-500"
               placeholder="Login"
-              value={state.username}
+              value={signupInfo.username}
               onChange={handleChange}
             />
           </div>
@@ -75,7 +70,7 @@ function Signup() {
               name="email"
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-500"
               placeholder="Email"
-              value={state.email}
+              value={signupInfo.email}
               onChange={handleChange}
             />
           </div>
@@ -86,7 +81,7 @@ function Signup() {
               name="password"
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-500"
               placeholder="Senha"
-              value={state.password}
+              value={signupInfo.password}
               onChange={handleChange}
             />
           </div>
