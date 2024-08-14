@@ -5,28 +5,26 @@ import {
   FaClipboardList,
   FaPencilAlt,
   FaCity,
-  FaHome
+  FaHome,
+  FaHashtag
 } from 'react-icons/fa'
-
-interface TeamFormData {
-  name: string
-  city: string
-  uf: string
-  address: string
-  addressNumber: string
-  skillLevel: 'Novato' | 'Medianos' | 'Veterano' | 'Qualquer nível'
-  description: string
-}
+import TeamService from '../../../services/TeamService'
+import { ITeam } from '../../../interfaces/ITeam'
+import CustomToast from '../../../utils/Toast'
+import { useNavigate } from 'react-router-dom'
 
 const CreateTeam: React.FC = () => {
-  const [formData, setFormData] = useState<TeamFormData>({
+  const userInfo = localStorage.getItem('userInfo')
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState<ITeam>({
     name: '',
     city: '',
     uf: '',
     address: '',
-    addressNumber: '',
+    addressNumber: 0,
     skillLevel: 'Novato',
-    description: ''
+    description: '',
+    createdBy: ''
   })
 
   const handleChange = (
@@ -41,10 +39,27 @@ const CreateTeam: React.FC = () => {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(formData)
-    // Lógica de envio do formulário
+
+    if (userInfo) {
+      const userInfoObj = JSON.parse(userInfo)
+
+      const userId = userInfoObj.user.userId
+      formData.createdBy = userId
+      const resp = await TeamService.createTeam(formData)
+
+      if (resp.success && resp.data) {
+        CustomToast.showToast({
+          type: 'success',
+          message: resp.message
+        })
+
+        navigate('/home')
+      }
+    } else {
+      console.error('userinfo não encontrado no localStorage')
+    }
   }
 
   return (
@@ -102,13 +117,16 @@ const CreateTeam: React.FC = () => {
               />
             </div>
             <div className="relative w-1/4">
+              <FaHashtag className="absolute left-3 top-3 text-gray-400" />
               <input
                 type="text"
                 name="addressNumber"
                 placeholder="Nº"
-                value={formData.addressNumber}
+                value={
+                  formData.addressNumber === 0 ? '' : formData.addressNumber
+                }
                 onChange={handleChange}
-                className="w-full pl-4 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-green-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-green-500"
               />
             </div>
           </div>

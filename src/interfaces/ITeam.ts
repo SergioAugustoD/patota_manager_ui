@@ -1,7 +1,14 @@
+import { IUser } from './IUser'
+
 export interface ITeam {
-  id: number
+  teamId?: number
   name: string
-  detail: string
-  location: string
-  owner: string
+  city: string
+  uf: string
+  address: string
+  addressNumber: number
+  skillLevel: string
+  description: string
+  createdBy: string
+  user?: IUser
 }

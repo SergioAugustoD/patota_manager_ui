@@ -47,7 +47,7 @@ function Signup() {
               type="text"
               name="name"
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-500"
-              placeholder="Nome"
+              placeholder="Nome completo"
               value={signupInfo.name}
               onChange={handleChange}
             />

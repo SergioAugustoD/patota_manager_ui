@@ -1,76 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight, FaMapMarkerAlt } from 'react-icons/fa'
 import { useSpring, animated } from '@react-spring/web'
 import { ITeam } from '../interfaces/ITeam'
+import TeamService from '../services/TeamService'
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0)
+  const [teams, setTeams] = useState<ITeam[]>([])
 
-  const teams: ITeam[] = [
-    {
-      id: 1,
-      name: 'Time A',
-      detail: 'Descrição do Time A',
-      location: 'Campo A',
-      owner: 'Owner A'
-    },
-    {
-      id: 2,
-      name: 'Time B',
-      detail: 'Descrição do Time B',
-      location: 'Campo B',
-      owner: 'Owner B'
-    },
-    {
-      id: 3,
-      name: 'Time C',
-      detail: 'Descrição do Time C',
-      location: 'Campo C',
-      owner: 'Owner C'
-    },
-    {
-      id: 4,
-      name: 'Time D',
-      detail: 'Descrição do Time D',
-      location: 'Campo D',
-      owner: 'Owner D'
-    },
-    {
-      id: 5,
-      name: 'Time E',
-      detail: 'Descrição do Time E',
-      location: 'Campo E',
-      owner: 'Owner E'
-    },
-    {
-      id: 6,
-      name: 'Time F',
-      detail: 'Descrição do Time F',
-      location: 'Campo F',
-      owner: 'Owner F'
-    },
-    {
-      id: 7,
-      name: 'Time G',
-      detail: 'Descrição do Time G',
-      location: 'Campo G',
-      owner: 'Owner G'
-    },
-    {
-      id: 8,
-      name: 'Time H',
-      detail: 'Descrição do Time H',
-      location: 'Campo H',
-      owner: 'Owner H'
-    },
-    {
-      id: 9,
-      name: 'Time I',
-      detail: 'Descrição do Time I',
-      location: 'Campo I',
-      owner: 'Owner I'
+  useEffect(() => {
+    const fetchTeams = async () => {
+      try {
+        const response = TeamService.getTeams()
+        const data = (await response).data
+        setTeams(data)
+      } catch (error) {
+        console.error('Error fetching teams:', error)
+      }
     }
-  ]
+    fetchTeams()
+  }, [])
+
   // Função para determinar o número de slides exibidos com base na largura da tela
   const slidesToShow = (): number => (window.innerWidth < 768 ? 1 : 3)
 
@@ -145,20 +95,27 @@ const Carousel = () => {
             <div key={index} className="flex w-full">
               {group.map((team) => (
                 <div
-                  key={team.id}
+                  key={team.teamId}
                   className="w-full md:w-1/3 px-2 md:px-4 h-4/5"
                 >
-                  <div className="bg-white p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-                    <h3 className="text-lg font-semibold mb-2">{team.name}</h3>
-                    <p className="text-gray-600 mb-1">
-                      <strong>Detalhe:</strong> {team.detail}
-                    </p>
-                    <p className="text-gray-600 mb-1">
-                      <strong>Local:</strong> {team.location}
-                    </p>
-                    <p className="text-gray-600 mb-4">
-                      <strong>Dono da Patota:</strong> {team.owner}
-                    </p>
+                  <div className="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                    <h3 className="text-lg font-semibold mb-2 ">{team.name}</h3>
+                    <div className="text-gray-600 mb-1">
+                      <div className="flex mb-2">
+                        <FaMapMarkerAlt className="mr-2 text-blue-600" />
+                        <p>
+                          <strong>Local:</strong>
+                          <br />
+                          <span className="text-gray-500 text-sm/[12px]">
+                            {team.city}, {team.uf}, {team.address},{' '}
+                            {team.addressNumber}
+                          </span>
+                        </p>
+                      </div>
+                      <p className=" text-gray-800 font-semibold">
+                        <strong>Criador:</strong> {team.user?.name}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
