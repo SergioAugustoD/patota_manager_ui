@@ -50,6 +50,10 @@ const Home: React.FC = () => {
     navigate('/')
   }, [logout])
 
+  const handleOpenCreateTeam = () => {
+    navigate('/create-team')
+  }
+
   useEffect(() => {
     document.addEventListener(
       'mousedown',
@@ -155,7 +159,10 @@ const Home: React.FC = () => {
             <FaPlusCircle className="text-3xl text-purple-500 mb-4" />
             <h2 className="text-2xl font-semibold mb-2">Criar Nova Patota</h2>
             <p className="text-gray-600">Crie uma nova patota e divirta-se.</p>
-            <button className="mt-4 py-2 px-4 bg-purple-500 text-white rounded-full hover:bg-purple-600 focus:outline-none focus:ring-4 focus:ring-purple-500 transform transition-transform hover:scale-105">
+            <button
+              onClick={handleOpenCreateTeam}
+              className="mt-4 py-2 px-4 bg-purple-500 text-white rounded-full hover:bg-purple-600 focus:outline-none focus:ring-4 focus:ring-purple-500 transform transition-transform hover:scale-105"
+            >
               Criar Patota
             </button>
           </div>

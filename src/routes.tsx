@@ -6,6 +6,7 @@ import Home from './pages/Home/Home'
 import ErrorPage from './error-page'
 import Signup from './pages/Signup/Signup'
 import ProtectedRoute from './components/ProtectedRoute'
+import CreateTeam from './pages/Team/Create/CreateTeam'
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,15 @@ export const router = createBrowserRouter([
   {
     path: '/signup',
     element: <Signup />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '/create-team',
+    element: (
+      <ProtectedRoute>
+        <CreateTeam />
+      </ProtectedRoute>
+    ),
     errorElement: <ErrorPage />
   }
 ])
