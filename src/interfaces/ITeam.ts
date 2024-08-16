@@ -1,7 +1,7 @@
 import { IUser } from './IUser'
 
 export interface ITeam {
-  teamId?: number
+  teamId?: string
   name: string
   city: string
   uf: string

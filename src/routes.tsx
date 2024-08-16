@@ -7,6 +7,8 @@ import ErrorPage from './error-page'
 import Signup from './pages/Signup/Signup'
 import ProtectedRoute from './components/ProtectedRoute'
 import CreateTeam from './pages/Team/Create/CreateTeam'
+import TeamsList from './pages/Team/List/TeamsList'
+import TeamDetails from './pages/Team/Detail/TeamDetails'
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +40,24 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <CreateTeam />
+      </ProtectedRoute>
+    ),
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '/list-team',
+    element: (
+      <ProtectedRoute>
+        <TeamsList />
+      </ProtectedRoute>
+    ),
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '/team-details',
+    element: (
+      <ProtectedRoute>
+        <TeamDetails />
       </ProtectedRoute>
     ),
     errorElement: <ErrorPage />

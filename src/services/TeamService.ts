@@ -44,9 +44,30 @@ async function getTeams(): Promise<IApiResponse<ITeam[]>> {
   return dataResponse
 }
 
+async function getTeamById(teamId: string) {
+  const token = getTokenFromLocalStorage()?.toString()
+
+  const response = await instance.get(`team/team-details/${teamId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  const dataResponse = response.data
+
+  if (!dataResponse.success) {
+    CustomToast.showToast({
+      type: 'error',
+      message: dataResponse.message
+    })
+    return Promise.reject(dataResponse.message)
+  }
+
+  return dataResponse
+}
 const TeamService = {
   createTeam,
-  getTeams
+  getTeams,
+  getTeamById
 }
 
 export default TeamService
